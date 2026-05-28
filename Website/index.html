@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Health Monitoring Dashboard</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(to right,#141e30,#243b55);
+color:white;
+text-align:center;
+}
+
+h1{
+margin-top:20px;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.card{
+background:rgba(255,255,255,0.1);
+padding:20px;
+margin:20px;
+width:280px;
+border-radius:20px;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+
+.value{
+font-size:40px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.alert{
+color:red;
+font-size:35px;
+font-weight:bold;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+50%{opacity:0;}
+}
+
+a{
+color:#00ffff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>💙 Health Monitoring Dashboard</h1>
+
+<div class="container">
+
+<div class="card">
+<h2>❤️ Heart Rate</h2>
+<div class="value" id="hr">--</div>
+</div>
+
+<div class="card">
+<h2>🫁 SpO₂</h2>
+<div class="value" id="spo2">--</div>
+</div>
+
+<div class="card">
+<h2>🚨 Status</h2>
+<div class="value" id="alert">Normal</div>
+</div>
+
+<div class="card">
+<h2>📍 Location</h2>
+<a id="map" target="_blank">Open Map</a>
+</div>
+
+</div>
+
+<script>
+
+var firebaseConfig = {
+databaseURL: "https://healthbelt1-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+firebase.database().ref("health").on("value", function(snapshot){
+
+var d = snapshot.val();
+
+document.getElementById("hr").innerHTML = d.heartrate + " BPM";
+
+document.getElementById("spo2").innerHTML = d.spo2 + " %";
+
+document.getElementById("alert").innerHTML = d.fall;
+
+if(d.fall != "Normal"){
+document.getElementById("alert").className = "alert";
+
+alert(d.fall);
+}
+
+var link = "https://maps.google.com/?q="+d.latitude+","+d.longitude;
+
+document.getElementById("map").href = link;
+
+});
+
+</script>
+
+</body>
+</html>
