@@ -39,6 +39,11 @@ Displays:
 - Emergency status
 - Live GPS location
 
+6) Circuit Diagram
+   <img width="914" height="608" alt="image" src="https://github.com/user-attachments/assets/39cfcfcf-c5c3-4696-b81b-9201c6a0605e" />
+
+7) Dashboard
+   <img width="1389" height="331" alt="image" src="https://github.com/user-attachments/assets/8fb6cc73-7e3c-4c56-8ab3-163a7c4bddd4" />
 
 Author
 Surya Marni
